@@ -1,0 +1,186 @@
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~
+$ mkdir git-merge-demo
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~
+$ cd git-merge-demo
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo
+$ git init
+Initialized empty Git repository in C:/Users/Nihal/git-merge-demo/.git/
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ echo "version1">file.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git add .
+warning: in the working copy of 'file.txt', LF will be replaced by CRLF the next time Git touches it
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git commit -m "IC"
+[master (root-commit) 3073b04] IC
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature)
+$ echo "changed in feature">file1.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature)
+$ git add .
+warning: in the working copy of 'file1.txt', LF will be replaced by CRLF the next time Git touches it
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature)
+$ git commit -m "ch in feature"
+[feature 34fc5f3] ch in feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file1.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature)
+$ git checkout master
+Switched to branch 'master'
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ echo "hello">file1.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git add .
+warning: in the working copy of 'file1.txt', LF will be replaced by CRLF the next time Git touches it
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git commit -m "ch in master"
+[master db3fc52] ch in master
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file1.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git merge feature
+Auto-merging file1.txt
+CONFLICT (add/add): Merge conflict in file1.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master|MERGING)
+$ cat file1.txt
+<<<<<<< HEAD
+hello
+=======
+changed in feature
+>>>>>>> feature
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master|MERGING)
+$ echo "allow changes in master and feature">file1.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master|MERGING)
+$ git add .
+warning: in the working copy of 'file1.txt', LF will be replaced by CRLF the next time Git touches it
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master|MERGING)
+$ git commit -m "FC"
+[master ae2bf0c] FC
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git log
+commit ae2bf0cbb5fa1e45417331ec11d1e3116cfd2949 (HEAD -> master)
+Merge: db3fc52 34fc5f3
+Author: Nihal N M <madhunm1242005@gmail.com>
+Date:   Wed Mar 11 10:16:46 2026 +0530
+
+    FC
+
+commit db3fc52dbdd6dba82d9365386765e05c7b972902
+Author: Nihal N M <madhunm1242005@gmail.com>
+Date:   Wed Mar 11 10:15:24 2026 +0530
+
+    ch in master
+
+commit 34fc5f3cf2c5b197947c4ef0a59eabbfa084a2ec (feature)
+Author: Nihal N M <madhunm1242005@gmail.com>
+Date:   Wed Mar 11 10:14:30 2026 +0530
+
+    ch in feature
+
+commit 3073b04042f923cfb5f7b649108648db5157ff42
+Author: Nihal N M <madhunm1242005@gmail.com>
+Date:   Wed Mar 11 10:13:04 2026 +0530
+
+    IC
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ ^C
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git remote add origin https://github.com/<your-username>/git-merge-demo.git
+bash: your-username: No such file or directory
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ https://github.com/Nihalnm-124/git-merge-demo.git
+bash: https://github.com/Nihalnm-124/git-merge-demo.git: No such file or directory
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ ^C
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git remote add origin https://github.com/Nihalnm-124/git-merge-demo.git
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git push -u origin master
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (12/12), 967 bytes | 138.00 KiB/s, done.
+Total 12 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/Nihalnm-124/git-merge-demo.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git push origin feature
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'feature' on GitHub by visiting:
+remote:      https://github.com/Nihalnm-124/git-merge-demo/pull/new/feature
+remote:
+To https://github.com/Nihalnm-124/git-merge-demo.git
+ * [new branch]      feature -> feature
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (master)
+$ git checkout -b feature2
+Switched to a new branch 'feature2'
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$ echo "new feature">feature2.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$ git add .
+warning: in the working copy of 'feature2.txt', LF will be replaced by CRLF the next time Git touches it
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$ git commit -m "feature2 commit"
+[feature2 9a33490] feature2 commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 feature2.txt
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$ git push origin feature2
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 315 bytes | 315.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'feature2' on GitHub by visiting:
+remote:      https://github.com/Nihalnm-124/git-merge-demo/pull/new/feature2
+remote:
+To https://github.com/Nihalnm-124/git-merge-demo.git
+ * [new branch]      feature2 -> feature2
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$ ^C
+
+Nihal@DESKTOP-VMOSHR7 MINGW64 ~/git-merge-demo (feature2)
+$
